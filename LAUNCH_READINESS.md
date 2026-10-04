@@ -7,7 +7,7 @@ Updated 2026-10-04. Public launch remains blocked by the gates below.
 - Mobile repository: https://github.com/njomzadomi-hub/workit-mobile
 - Branch: `feat/workit-world-bazaar`
 - Current code head: `a56d6dd57eb7d9256c07119386bc51f8d42e9639`
-- [Mobile CI #243](https://github.com/njomzadomi-hub/workit-mobile/actions/runs/37230943909): running at this update. Previous checkpoint #242 passed.
+- [Mobile CI #243](https://github.com/njomzadomi-hub/workit-mobile/actions/runs/37230943909): GREEN. Includes auth, video and production-config source checks.
 - [Android QA build #160](https://github.com/njomzadomi-hub/workit-mobile/actions/runs/37230941065): building the new recovery version. Previous build #159 passed and published an APK for ba26da0. Inspect the run and release commit before installing an APK.
 - Deployed hiring function: `workit-hiring v7 ACTIVE`. Source validates candidate acceptance before hiring.
 
@@ -20,7 +20,7 @@ The implemented hiring loop is Talent Pool → Invite → Viewed → Apply → S
 - Video playback uses expo-video; the unmaintained expo-av package is removed. Mocked-player checks cover mute/loop, focus and background pausing, manual controls and error fallback.
 - Icon, adaptive foreground, notification icon and splash are configured; native Android project generation passes.
 - Build dependencies have a lockfile and CI installs with npm ci.
-- Password reset request/form and cold/warm link handling are implemented; auth source tests pass with mocks. Allowlist/SMTP and real-device recovery remain unverified.
+- Password reset request/form and cold/warm link handling are implemented; auth source tests pass with mocks. Allowlist/SMTP and real-device recovery remain unverified. The Supabase dashboard requires browser sign-in before its URL settings can be inspected.
 - Production configuration preflight and explicit EAS environments are implemented.
 - EAS project ID validation is implemented. A real WORKIT EAS project ID and platform credentials still need to be linked.
 - Browser preview renders Login, Discover, Interview, Offer, Recovery and Reset using actual mobile components with sample services. Invalid calendar dates are rejected and a valid interview time displays correctly.
