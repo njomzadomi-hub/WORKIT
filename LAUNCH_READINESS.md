@@ -1,106 +1,50 @@
 # WORKIT Launch Readiness
 
-WORKIT is now a launch candidate, not a prototype. This checklist defines the remaining gates before public release.
+Updated 2026-10-04. Public launch remains blocked by the gates below.
 
-## Product promise
+## Current checkpoint
 
-WORKIT is a video-first global work platform where people can discover professionals, show real work, find jobs, find workers, hire, book, buy, teach and transact from one professional identity.
+- Mobile repository: https://github.com/njomzadomi-hub/workit-mobile
+- Branch: `feat/workit-world-bazaar`
+- Verified code head: `ba26da079f7313fef52545924d87fb85a0c1387c`
+- [Mobile CI #242](https://github.com/njomzadomi-hub/workit-mobile/actions/runs/37229256304): GREEN.
+- [Android QA build #159](https://github.com/njomzadomi-hub/workit-mobile/actions/runs/37229253900): native APK build in progress at this update. Inspect the run and release commit before installing an APK.
+- Deployed hiring function: `workit-hiring v7 ACTIVE`. Source validates candidate acceptance before hiring.
 
-## GREEN — completed
+The implemented hiring loop is Talent Pool → Invite → Viewed → Apply → Shortlist → Structured Interview Scheduling → Structured Offer → Candidate Accept/Decline → Hired → Verified Work. Complete real-device integration QA is still required.
 
-- [x] Video-first Feed with profession-specific actions
-- [x] Explore: Discover Work / Find Jobs / Find Workers
-- [x] Profession/skill/location/availability talent search
-- [x] Job posting backend + job detail flow
-- [x] Job applications + employer hiring pipeline
-- [x] Marketplace listings for services/products/teaching
-- [x] Feed posts linked to market listings
-- [x] Orders lifecycle + transition graph
-- [x] Verified reviews after completed transactions
-- [x] Inbox + 1:1 messaging
-- [x] User reporting + admin moderation queue
-- [x] Pricing / WORKIT Pro / seller Earnings surfaces
-- [x] Revenue engine for fees and seller payout calculations
-- [x] Supabase WORKIT restored and online
-- [x] Commerce/revenue/moderation schema applied live
-- [x] Application pipeline schema reconciled
-- [x] RLS/security hardening applied
-- [x] Trigger functions hardened
-- [x] Collision-safe profile username creation
-- [x] Foreign-key/search indexes added
-- [x] Modern Supabase publishable key available
-- [x] Supabase security advisor rerun after migration
-- [x] Supabase performance advisor rerun after migration
-- [x] API CI green
-- [x] Mobile TypeScript check green
-- [x] Android Expo bundle export green
-- [x] iOS Expo bundle export green
-- [x] Feed CTA routes to Job / Market / Professional flows
-- [x] Post Job creates a real job + feed post
-- [x] Service/Product/Teach creates market listing + feed post
-- [x] Store listing / ASO draft prepared
+## Verified development checks
+
+- Mobile TypeScript check and Android/iOS/web Expo exports pass.
+- Expo Doctor passes all 21 checks after upgrading React Native to 0.86.3 and aligning dependencies with Expo SDK 57.
+- Video playback uses expo-video; the unmaintained expo-av package is removed. Mocked-player checks cover mute/loop, focus and background pausing, manual controls and error fallback.
+- Icon, adaptive foreground, notification icon and splash are configured; native Android project generation passes.
+- Build dependencies have a lockfile and CI installs with npm ci.
+- EAS project ID validation is implemented. A real WORKIT EAS project ID and platform credentials still need to be linked.
+- Browser preview renders Login, Discover, Interview and Offer using actual mobile components with sample services. Invalid calendar dates are rejected and a valid interview time displays correctly.
+
+## See the interface
+
+[Open current app-screen preview](https://njomzadomi-hub.github.io/WORKIT/current-app-preview.html)
+
+![Current discovery screen with sample data](current-app-preview.jpg)
+
+This visual preview sends no login credentials, applications, messages or offers. It does not verify native performance or production service delivery. Store screenshots must be captured from final device builds.
 
 ## P0 — required before public launch
 
-- [ ] Connect a dedicated WORKIT Stripe account / payment infrastructure
-- [ ] Implement real checkout with webhook-confirmed payment state
-- [ ] Implement seller payouts / marketplace settlement
-- [ ] Test refunds/disputes end-to-end
-- [ ] Test Pro + employer subscriptions end-to-end
-- [ ] Confirm App Store / Google Play policy treatment for marketplace transactions and subscriptions
-- [ ] Configure production EXPO_PUBLIC_SUPABASE_URL
-- [ ] Configure production EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY
-- [ ] Configure production EXPO_PUBLIC_API_URL
-- [ ] Deploy latest API launch branch to production
-- [ ] Enable Supabase leaked-password protection
-- [ ] End-to-end test: signup → profile → post → discover → message → apply/order
-- [ ] Employer end-to-end: post job → applications → shortlist → interview → offer → hired
-- [ ] Marketplace end-to-end: listing → order → accepted → in progress → delivered → completed → review
-- [ ] Real Android device smoke test
-- [ ] Real iPhone smoke test
-- [ ] Account deletion flow verified
-- [ ] Final Privacy Policy public URL
-- [ ] Final Terms of Service public URL
-- [ ] Final Community Guidelines public URL
-- [ ] Final Support/Contact public URL
-- [ ] Production crash/error monitoring configured
-- [ ] Final app icon, splash and store screenshots
+- [ ] Latest-head native APK and signed production builds pass.
+- [ ] Real Android and iPhone QA: signup, login, logout, session restore, account recovery, media and long feed sessions.
+- [ ] Employer/candidate integration QA: invite → apply → shortlist → interview proposal/response → offer accept/decline → hired → verified work.
+- [ ] Push delivery and tap routing verified with WORKIT EAS project ID and Android/iOS credentials.
+- [ ] Production backend schema, RLS, ownership checks, storage policies and abuse limits reviewed. Project health reports ACTIVE_HEALTHY, but the latest security-advisor requests returned hibernation errors and database inspection timed out; a clean audit is unverified.
+- [ ] Dedicated WORKIT payment infrastructure; webhook-confirmed checkout, seller settlement, subscriptions, refunds and disputes tested before enabling payments.
+- [ ] Reporting/blocking/moderation and account deletion verified end to end.
+- [ ] Final Privacy Policy, Terms, Community Guidelines, support and deletion URLs published and approved.
+- [ ] Production crash/error monitoring and notification preferences verified.
+- [ ] Store screenshots, metadata, privacy disclosures, age rating, signing and developer accounts complete.
+- [ ] Production build and App Store/Google Play submission reviewed.
 
-## P1 — strongly recommended for launch week
+## Release evidence
 
-- [ ] Global profession taxonomy v1 with aliases/synonyms
-- [ ] Company profiles + verification
-- [ ] Candidate shortlist / saved talent
-- [ ] Employer invite-to-apply flow
-- [ ] My Applications dashboard polish
-- [ ] My Orders / delivery workspace polish
-- [ ] Appointment calendar for bookable professions
-- [ ] Portfolio/project detail pages
-- [ ] Profile completion onboarding
-- [ ] Push notification preferences + QA
-- [ ] Search analytics + no-result tracking
-- [ ] Anti-spam / rate limits
-- [ ] Content/media moderation automation
-- [ ] Analytics events for activation, hiring and transactions
-- [ ] Seed high-quality launch content across major profession categories
-
-## Revenue model foundation
-
-WORKIT monetizes when economic value is created:
-
-- Marketplace transaction fee
-- WORKIT Pro subscription
-- Employer Growth / Pro plans
-- Job, profile and post boosts
-- Teaching/course transaction fee
-- Donation platform fee
-- Future enterprise recruiting products
-
-## Current external blocker
-
-### Stripe
-The currently connected Stripe account belongs to another project sandbox, not WORKIT. It must not be used for WORKIT payments. Connect a dedicated WORKIT Stripe account/sandbox before enabling real checkout, subscriptions or payouts.
-
-## Release rule
-
-Do not merge the launch branches to `main`, submit to app stores or enable real payments until the payment, production-config, legal and real-device P0 gates are green or explicitly waived after review.
+Keep device, service and store evidence tied to the tested commit. Source implementation, compilation and browser preview alone do not close the P0 gates. Earlier implementation checklist entries are not current integration-test evidence.
