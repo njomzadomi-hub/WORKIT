@@ -6,9 +6,9 @@ Updated 2026-10-04. Public launch remains blocked by the gates below.
 
 - Mobile repository: https://github.com/njomzadomi-hub/workit-mobile
 - Branch: `feat/workit-world-bazaar`
-- Verified code head: `ba26da079f7313fef52545924d87fb85a0c1387c`
-- [Mobile CI #242](https://github.com/njomzadomi-hub/workit-mobile/actions/runs/37229256304): GREEN.
-- [Android QA build #159](https://github.com/njomzadomi-hub/workit-mobile/actions/runs/37229253900): native APK build in progress at this update. Inspect the run and release commit before installing an APK.
+- Current code head: `a56d6dd57eb7d9256c07119386bc51f8d42e9639`
+- [Mobile CI #243](https://github.com/njomzadomi-hub/workit-mobile/actions/runs/37230943909): running at this update. Previous checkpoint #242 passed.
+- [Android QA build #160](https://github.com/njomzadomi-hub/workit-mobile/actions/runs/37230941065): building the new recovery version. Previous build #159 passed and published an APK for ba26da0. Inspect the run and release commit before installing an APK.
 - Deployed hiring function: `workit-hiring v7 ACTIVE`. Source validates candidate acceptance before hiring.
 
 The implemented hiring loop is Talent Pool → Invite → Viewed → Apply → Shortlist → Structured Interview Scheduling → Structured Offer → Candidate Accept/Decline → Hired → Verified Work. Complete real-device integration QA is still required.
@@ -20,8 +20,10 @@ The implemented hiring loop is Talent Pool → Invite → Viewed → Apply → S
 - Video playback uses expo-video; the unmaintained expo-av package is removed. Mocked-player checks cover mute/loop, focus and background pausing, manual controls and error fallback.
 - Icon, adaptive foreground, notification icon and splash are configured; native Android project generation passes.
 - Build dependencies have a lockfile and CI installs with npm ci.
+- Password reset request/form and cold/warm link handling are implemented; auth source tests pass with mocks. Allowlist/SMTP and real-device recovery remain unverified.
+- Production configuration preflight and explicit EAS environments are implemented.
 - EAS project ID validation is implemented. A real WORKIT EAS project ID and platform credentials still need to be linked.
-- Browser preview renders Login, Discover, Interview and Offer using actual mobile components with sample services. Invalid calendar dates are rejected and a valid interview time displays correctly.
+- Browser preview renders Login, Discover, Interview, Offer, Recovery and Reset using actual mobile components with sample services. Invalid calendar dates are rejected and a valid interview time displays correctly.
 
 ## See the interface
 
